@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="69.0" layoutY="174.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="295.0" text="RETIRAR SENHA">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button layoutX="70.0" layoutY="108.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="295.0" text="RETIRAR SENHA PREFERENCIAL">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="23.0" layoutY="243.0" prefHeight="35.0" prefWidth="388.0" text="Toque na tela para retirar a sua senha">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <AnchorPane prefHeight="101.0" prefWidth="432.0" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 3; -fx-border-color: gray;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="216.0" layoutY="11.0" prefHeight="79.0" prefWidth="209.0" text="P00013" textAlignment="CENTER" textOverrun="CLIP">
+               <font>
+                  <Font size="53.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="8.0" prefHeight="85.0" prefWidth="201.0" text="SENHA:">
+               <font>
+                  <Font size="53.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
