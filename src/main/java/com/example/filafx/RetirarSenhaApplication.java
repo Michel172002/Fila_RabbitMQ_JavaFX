@@ -12,7 +12,7 @@ public class RetirarSenhaApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(RetirarSenhaApplication.class.getResource("RetirarSenhaPainel.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("Painel Retirar Senhas");
         stage.setScene(scene);
         stage.show();
     }

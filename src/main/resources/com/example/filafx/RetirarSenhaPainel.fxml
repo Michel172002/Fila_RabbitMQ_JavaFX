@@ -5,13 +5,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.filafx.controller.RetirarSenhaController">
    <children>
-      <Button layoutX="69.0" layoutY="174.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="295.0" text="RETIRAR SENHA">
+      <Button fx:id="btn_normal" layoutX="69.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#RetirarSenha" prefHeight="62.0" prefWidth="295.0" text="RETIRAR SENHA">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button layoutX="70.0" layoutY="108.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="295.0" text="RETIRAR SENHA PREFERENCIAL">
+         </cursor>
+      </Button>
+      <Button fx:id="btn_pref" layoutX="70.0" layoutY="108.0" mnemonicParsing="false" onMouseClicked="#RetirarSenhaPrioridade" prefHeight="62.0" prefWidth="295.0" text="RETIRAR SENHA PREFERENCIAL">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -23,7 +24,7 @@
       </Label>
       <AnchorPane prefHeight="101.0" prefWidth="432.0" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 3; -fx-border-color: gray;">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="216.0" layoutY="11.0" prefHeight="79.0" prefWidth="209.0" text="P00013" textAlignment="CENTER" textOverrun="CLIP">
+            <Label fx:id="label_senha" alignment="CENTER" contentDisplay="CENTER" layoutX="216.0" layoutY="11.0" prefHeight="79.0" prefWidth="209.0" textAlignment="CENTER" textOverrun="CLIP">
                <font>
                   <Font size="53.0" />
                </font>

@@ -7,4 +7,7 @@ module com.example.filafx {
 
     opens com.example.filafx to javafx.fxml;
     exports com.example.filafx;
+
+    exports com.example.filafx.controller;
+    opens com.example.filafx.controller;
 }
