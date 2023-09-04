@@ -4,6 +4,9 @@ module com.example.filafx {
 
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
+    requires com.rabbitmq.client;
+    requires org.slf4j;
+    requires java.sql;
 
     opens com.example.filafx to javafx.fxml;
     exports com.example.filafx;
