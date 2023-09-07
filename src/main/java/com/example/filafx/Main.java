@@ -18,11 +18,18 @@ public class Main extends Application {
         FXMLLoader fxmlLoaderAtendente = new FXMLLoader(Main.class.getResource("AtendentePainel.fxml"));
         Stage stageAtentende = new Stage();
         Scene sceneAtendente = new Scene(fxmlLoaderAtendente.load());
-        stageAtentende.setTitle("Painel2 Retirar Senhas");
+        stageAtentende.setTitle("Painel atentendente");
         stageAtentende.setScene(sceneAtendente);
+
+        FXMLLoader fxmlLoaderPainel = new FXMLLoader(Main.class.getResource("SenhasChamadasPainel.fxml"));
+        Stage stagePainel = new Stage();
+        Scene scenePainel = new Scene(fxmlLoaderPainel.load());
+        stagePainel.setTitle("Painel exibir senhas Chamadas");
+        stagePainel.setScene(scenePainel);
 
         stage.show();
         stageAtentende.show();
+        stagePainel.show();
     }
 
     public static void main(String[] args) {
