@@ -7,6 +7,7 @@ module com.example.filafx {
     requires com.rabbitmq.client;
     requires org.slf4j;
     requires java.sql;
+    requires com.google.gson;
 
     opens com.example.filafx to javafx.fxml;
     exports com.example.filafx;
