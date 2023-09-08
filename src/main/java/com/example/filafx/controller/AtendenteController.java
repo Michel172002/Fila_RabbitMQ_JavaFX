@@ -4,6 +4,7 @@ import com.rabbitmq.client.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -12,6 +13,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeoutException;
 
+import com.google.gson.Gson;
+
 public class AtendenteController implements Initializable {
 
     @FXML
@@ -19,6 +22,9 @@ public class AtendenteController implements Initializable {
 
     @FXML
     private Button btnChamarSenhaDnv;
+
+    @FXML
+    private Label labelTitulo;
 
     private static final String FILA_PRIORIDADE = "fila_prioridade";
     private static final String FILA_NORMAL = "fila_normal";
@@ -31,10 +37,14 @@ public class AtendenteController implements Initializable {
     private int qntSenha = 0;
     private String senhaAtual;
 
+    private String guiche;
+    private String titulo;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.factory = new ConnectionFactory();
         this.factory.setHost("localhost");
+        labelTitulo.setText(titulo);
     }
 
     private void AbrirConexao(){
@@ -79,7 +89,10 @@ public class AtendenteController implements Initializable {
                 if (channel.isOpen()) {
                     channel.queueDeclare(FILA_SENHAS_CHAMADAS, true, false, false, null);
 
-                    String senhaPreparada = String.join(" ", senhaAtual);
+                    SenhaAtendente senhaAtendente = new SenhaAtendente(senhaAtual, guiche);
+
+                    Gson gson = new Gson();
+                    String senhaPreparada = gson.toJson(senhaAtendente);
 
                     channel.basicPublish("", FILA_SENHAS_CHAMADAS,
                             MessageProperties.PERSISTENT_TEXT_PLAIN,
@@ -111,5 +124,13 @@ public class AtendenteController implements Initializable {
                 MessageProperties.PERSISTENT_TEXT_PLAIN,
                 senhaPreparada.getBytes(StandardCharsets.UTF_8));
         FecharConexao();
+    }
+
+    public void setGuiche(String guiche){
+        this.guiche = guiche;
+    }
+
+    public void setTitulo(String titulo){
+        this.titulo = titulo;
     }
 }

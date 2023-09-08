@@ -1,5 +1,6 @@
 package com.example.filafx.controller;
 
+import com.google.gson.Gson;
 import com.rabbitmq.client.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -32,7 +33,7 @@ public class PainelController implements Initializable {
     @FXML
     private Label senhaAnterior3;
 
-    private LinkedList<String> senhasChamadas = new LinkedList<>();
+    private LinkedList<SenhaAtendente> senhasChamadas = new LinkedList<>();
     private int tamanhoMaximo = 4;
 
     private static final String FILA_SENHAS_CHAMADAS = "fila_senhas_chamadas";
@@ -80,13 +81,15 @@ public class PainelController implements Initializable {
         channel.queueDeclare(FILA_SENHAS_CHAMADAS, true, false, false, null);
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-            String senha = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            System.out.println("Recebida senha da fila: " + senha); // Mensagem de depuração
+            String senhaAtendenteJson = new String(delivery.getBody(), StandardCharsets.UTF_8);
+
+            Gson gson = new Gson();
+            SenhaAtendente senhaAtendente = gson.fromJson(senhaAtendenteJson, SenhaAtendente.class);
 
             if (senhasChamadas.size() >= tamanhoMaximo) {
                 senhasChamadas.removeLast();
             }
-            senhasChamadas.addFirst(senha);
+            senhasChamadas.addFirst(senhaAtendente);
             channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
         };
         channel.basicConsume(FILA_SENHAS_CHAMADAS, false, deliverCallback, consumerTag -> {
@@ -101,11 +104,15 @@ public class PainelController implements Initializable {
         }
 
         Platform.runLater(() -> {
-            senhaAtual.setText(senhasChamadas.size() > 0 ? senhasChamadas.getFirst() : "");
-            senhaAnterior1.setText(senhasChamadas.size() > 1 ? senhasChamadas.get(1) : "");
-            senhaAnterior2.setText(senhasChamadas.size() > 2 ? senhasChamadas.get(2) : "");
-            senhaAnterior3.setText(senhasChamadas.size() > 3 ? senhasChamadas.get(3) : "");
-            System.out.println(senhasChamadas);
+            senhaAtual.setText(!senhasChamadas.isEmpty() ? senhasChamadas.getFirst().getSenha() : "");
+            senhaAnterior1.setText(senhasChamadas.size() > 1 ? senhasChamadas.get(1).getSenha() : "");
+            senhaAnterior2.setText(senhasChamadas.size() > 2 ? senhasChamadas.get(2).getSenha() : "");
+            senhaAnterior3.setText(senhasChamadas.size() > 3 ? senhasChamadas.getLast().getSenha() : "");
+
+            guicheAtual.setText(!senhasChamadas.isEmpty() ? senhasChamadas.getFirst().getGuiche() : "");
+            guicheAnterior1.setText(senhasChamadas.size() > 1 ? senhasChamadas.get(1).getGuiche() : "");
+            guicheAnterior2.setText(senhasChamadas.size() > 2 ? senhasChamadas.get(2).getGuiche() : "");
+            guicheAnterior3.setText(senhasChamadas.size() > 3 ? senhasChamadas.getLast().getGuiche() : "");
         });
     }
 }
