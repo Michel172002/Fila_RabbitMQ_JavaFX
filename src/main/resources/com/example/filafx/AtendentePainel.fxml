@@ -13,6 +13,6 @@
       </Label>
       <Button fx:id="btnChamarSenhaDnv" layoutX="207.0" layoutY="71.0" mnemonicParsing="false" onMouseClicked="#ChamarSenhaDnv" prefHeight="109.0" prefWidth="124.0" text="CHAMAR SENHA NOVAMENTE" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="btnChamarNovaSenha" layoutX="45.0" layoutY="71.0" mnemonicParsing="false" onMouseClicked="#ChamarNovaSenha" prefHeight="109.0" prefWidth="124.0" text="CHAMAR NOVA SENHA" textAlignment="CENTER" wrapText="true" />
-      <Label layoutX="105.0" layoutY="44.0" />
+      <Label fx:id="labelAcabouMensagens" layoutX="105.0" layoutY="44.0" />
    </children>
 </AnchorPane>

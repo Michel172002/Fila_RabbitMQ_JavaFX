@@ -43,7 +43,7 @@ public class RetirarSenhaController {
             System.out.println("Erro ao enviar para o RabbitMQ: " + e);
         }
         DisabilitarBotoes(btn_normal, btn_pref, true);
-        LimparLabelSenha(label_senha, btn_normal, btn_pref);
+        HabilitarBotoes(label_senha, btn_normal, btn_pref);
     }
 
     @FXML
@@ -56,12 +56,7 @@ public class RetirarSenhaController {
             System.out.println("Erro ao enviar para o RabbitMQ: " + e);
         }
         DisabilitarBotoes(btn_normal, btn_pref, true);
-        LimparLabelSenha(label_senha, btn_normal, btn_pref);
-    }
-
-    public static void DisabilitarBotoes(Button btn_normal, Button btn_pref, Boolean isDisable){
-        btn_normal.setDisable(isDisable);
-        btn_pref.setDisable(isDisable);
+        HabilitarBotoes(label_senha, btn_normal, btn_pref);
     }
 
     public static String GerarSenha(String tipo){
@@ -91,9 +86,14 @@ public class RetirarSenhaController {
         }
     }
 
-    public static void LimparLabelSenha(Label label, Button btn_normal, Button btn_pref){
+    public static void DisabilitarBotoes(Button btn_normal, Button btn_pref, Boolean isDisable){
+        btn_normal.setDisable(isDisable);
+        btn_pref.setDisable(isDisable);
+    }
+
+    public static void HabilitarBotoes(Label label, Button btn_normal, Button btn_pref){
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(2), actionEvent -> {
+                new KeyFrame(Duration.seconds(1), actionEvent -> {
                     DisabilitarBotoes(btn_normal, btn_pref, false);
                     label.setText("");
                 })
